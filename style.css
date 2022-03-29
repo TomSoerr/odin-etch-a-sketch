@@ -1,0 +1,59 @@
+:root {
+    --background-color: rgb(30, 30, 30);
+    --toolbar-color: rgb(42, 42, 42);
+    --toolbar-active-color: rgb(207, 223, 207);
+}
+
+body {
+    background-color: var(--background-color);
+    margin: 0;
+    padding-left: 8vh;
+}
+
+/* Toolbar */
+.container-toolbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: var(--toolbar-color);
+    height: 100%;
+    width: 8vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+img {
+    width: 8vh;
+    height: 8vh;
+    border-left: 0.5vh solid rgba(0, 0, 0, 0);
+    padding: 1.5vh 1.5vh 1.5vh 1vh;
+    box-sizing: border-box;
+    filter: opacity(60%);
+    -webkit-filter: opacity(60%);
+}
+
+#grid {
+    margin-top: auto;
+}
+
+img:hover {
+    filter: opacity(100%);
+    -webkit-filter: opacity(100%);
+
+}
+
+.active {
+    border-left: 0.5vh solid white;
+    filter: opacity(100%);
+    -webkit-filter: opacity(100%);
+}
+    
+/* canvas */
+
+.container-canvas {
+    background-color: rgb(207, 223, 207);
+    height: 90vh;
+    width: 90vh;
+    margin: 5vh auto;
+}
