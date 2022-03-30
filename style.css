@@ -1,5 +1,5 @@
 :root {
-    --background-color: rgb(68, 47, 47);
+    --background-color: rgb(26, 26, 26);
     --toolbar-color: rgb(42, 42, 42);
 }
 
@@ -37,6 +37,7 @@ body {
 }
 
 img {
+    position: relative;
     width: 8vh;
     height: 8vh;
     border-left: 0.5vh solid transparent;
@@ -47,22 +48,35 @@ img {
     cursor: pointer;
 }
 
-#pen-color {
-    box-sizing: border-box;
+.container-toolbar-extension input {
     width: 8vh;
     height: 8vh;
-    padding: 1.5vh 1.5vh 1.5vh 1vh;
+    padding: 1.5vh 1.5vh 1.5vh 1.5vh;
     background-color: var(--toolbar-color);
-    border-left: 0.5vh solid transparent;
-    border-right: 0;
-    border-top: 0;
-    border-bottom: 0;
+    box-sizing: border-box;
+    border: 0;
+    visibility: hidden;
+}
+
+.container-toolbar-extension {
+    position: fixed;
+    top: 0;
+    left: 8vh;
+    display: flex;
+    flex-direction: column;
+    background-color: transparent;
 }
 
 
 img:hover {
     filter: opacity(100%);
     -webkit-filter: opacity(100%);
+}
+
+.active {
+    filter: opacity(100%);
+    -webkit-filter: opacity(100%);
+    border-left: 0.5vh solid white;
 }
 
     
