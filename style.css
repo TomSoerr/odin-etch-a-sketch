@@ -19,6 +19,8 @@ body {
     height: 100vh;
 }
 
+
+
 /* Toolbar */
 .container-toolbar {
     position: fixed;
@@ -32,7 +34,7 @@ body {
     align-items: center;
 }
 
-#grid {
+#grid-lines {
     margin-top: auto;
 }
 
@@ -82,15 +84,35 @@ img:hover {
     
 /* canvas */
 
+
 .container-canvas {
     cursor: pointer;
     height: 90vh;
     width: 90vh;
     display: flex;
     flex-direction: column;
+    background-color: transparent;
+    box-sizing: border-box;
 }
 
 .container-canvas:active {
     cursor: grabbing;
 }
 
+/* Toolbar portrait*/
+
+@media (orientation: portrait) {
+    .container-toolbar {
+        position: fixed;
+        top: 92vh;
+        background-color: var(--toolbar-color);
+        height: 8vh;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+    }
+    body {
+        background-color: aqua;
+    }
+}
+    

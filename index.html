@@ -11,22 +11,25 @@
 
     <div class="container-toolbar">
         <img id="background" src="./icons/background.png" alt="Background Color" title="Background color">
-        <img id="pen" typ src="./icons/pen.png" alt="Pencil" title="Pencil">           
-        <img src="./icons/fill.png" alt="Bucket" title="Bucket Tool">
-        <img src="./icons/eraser.png" alt="Eraser" title="Eraser">
-        <img src="./icons/random.png" alt="Random Color Tool" title="Random Color Tool">
-        <img src="./icons/w++.png" alt="Add White" title="Add White">
-        <img src="./icons/b++.png" alt="Add Black" title="Add Black">
-        <img id="grid" src="./icons/grid.png" alt="Toggle Grid Lines" title="Toggle Grid Lines">
-        <img src="./icons/size.png" alt="Grid Size" title="Grid Size">
-        <img src="./icons/clear.png" alt="Clear" title="Clear">
+        <img id="pen" class="only-one-active" typ src="./icons/pen.png" alt="Pencil" title="Pencil">           
+        <img id="bucket" class="only-one-active" src="./icons/fill.png" alt="Bucket" title="Bucket Tool">
+        <img id="eraser" class="only-one-active" src="./icons/eraser.png" alt="Eraser" title="Eraser">
+        <img id="random" class="only-one-active" src="./icons/random.png" alt="Random Color Tool" title="Random Color Tool">
+        <img id="add-white" class="only-one-active" src="./icons/w++.png" alt="Add White" title="Add White">
+        <img id="add-black" class="only-one-active" src="./icons/b++.png" alt="Add Black" title="Add Black">
+        <img id="grid-lines" src="./icons/grid.png" alt="Toggle Grid Lines" title="Toggle Grid Lines">
+        <img id="size" src="./icons/size.png" alt="Grid Size" title="Grid Size">
+        <img id="clear" src="./icons/clear.png" alt="Clear" title="Clear">
 
         <div class="container-toolbar-extension">
-            <input type="color" id="background-color" value="#ffffff">
+            <input type="color" id="background-color">
             <input type="color" id="pen-color">
         </div>
     </div>
-    <div class="container-canvas">
+    <div class="container-canvas-background">
+        <div class="container-canvas">
+
+        </div>
     </div>
 </body>
 </html>
