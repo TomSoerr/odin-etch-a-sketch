@@ -1,7 +1,7 @@
-# Mein Etch a Sketch Projekt
+# Mein „Etch a Sketch“ Projekt
 
-In diesem Projekt von „The Odin Project“ erstelle ich eine kleine Webanwendung zum zeichnen. Die Leinwand besteht aus Pixeln. 
-Hier ist ein Link zur [Live Preview](https://tomsoerr.github.io/odin-rock-paper-scissors/)
+In diesem Projekt von <em>„The Odin Project“</em> erstelle ich eine kleine Webanwendung zum zeichnen. Die Leinwand besteht aus Pixeln. 
+Hier ist ein Link zur [Live Preview](https://tomsoerr.github.io/odin-rock-paper-scissors/).
 
 Es gibt folgende Möglichkeiten,
 - den Hintergrund zu verändern,
@@ -16,5 +16,5 @@ Es gibt folgende Möglichkeiten,
 
 Die Icons wurden von mir erstellt.
 
-Hier geht es zu meinem nächsten [Projekt]()
+Hier geht es zu meinem nächsten [Projekt]().
 
