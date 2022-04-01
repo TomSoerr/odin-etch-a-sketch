@@ -28,10 +28,6 @@ let pencil = 'pen';
 penBtn.classList.add('active');
 //
 
-// todo:
-// bucket tool
-// grid size popup
-
 
 const buildCanvas = function buildCanvasGrid() {
     while (canvas.firstChild) {
@@ -118,7 +114,24 @@ const toggleGrid = function toggleGridLines() {
 };
 
 
-const bucketTool = function bucketTool(event) {
+const bucketTool = function bucketTool(target) {
+    const row = parseInt(target.id.match(/\d+/g)[0]);
+    const col = parseInt(target.id.match(/\d+/g)[1]);
+    const colorToFill = target.style.backgroundColor;
+
+    const top = document.getElementById(`${row - 1}-${col}`);
+    const bottom = document.getElementById(`${row + 1}-${col}`);
+    const left = document.getElementById(`${row}-${col - 1}`);
+    const right = document.getElementById(`${row}-${col + 1}`);
+
+    target.style.backgroundColor = currentPenColor;
+    target.dataset.color = target.style.backgroundColor;
+    target.dataset.shade = 0;
+
+    if (top && top.style.backgroundColor === colorToFill) bucketTool(top);
+    if (bottom && bottom.style.backgroundColor === colorToFill) bucketTool(bottom);
+    if (left && left.style.backgroundColor === colorToFill) bucketTool(left);
+    if (right && right.style.backgroundColor === colorToFill) bucketTool(right);
 };
 
 
@@ -229,7 +242,11 @@ const paint = function paintOnTheCanvas(event) {
             break;
 
         case 'bucket':
-            console.log('bucket');
+            bucketTool(event.target);
+            pencil = 'pen';
+            deactivateAll();
+            penBtn.classList.add('active');
+            break;
 
         case 'random':
             rand = () => Math.floor(Math.random() * 256);
