@@ -2,124 +2,46 @@ const canvas = document.querySelector('.container-canvas');
 const canvasBackground = document.querySelector('.container-canvas-background');
 
 const toolbar = document.querySelector('.container-toolbar');
-const background = document.querySelector('#background');
-const backgroundColor = document.querySelector('#background-color');
-const pen = document.querySelector('#pen');
-const penColor = document.querySelector('#pen-color');
-const eraser = document.querySelector('#eraser');
-const randomColor = document.querySelector('#random');
-const addWhite = document.querySelector('#add-white');
-const addBlack = document.querySelector('#add-black');
-const gridLines = document.querySelector('#grid-lines');
 
+const backgroundBtn = document.querySelector('#background');
+const backgroundColorPicker = document.querySelector('#background-color');
+const penBtn = document.querySelector('#pen');
+const penColorPicker = document.querySelector('#pen-color');
+const eraserBtn = document.querySelector('#eraser');
+const randomColorBtn = document.querySelector('#random');
+const addWhiteBtn = document.querySelector('#add-white');
+const addBlackBtn = document.querySelector('#add-black');
+const gridLinesBtn = document.querySelector('#grid-lines');
+
+// initial values
 let borderColor = 'rgb(127, 127, 127)';
-let canvasGrid = false;
 let currentGridSize = 10;
 let currentPenColor = '#000000';
 let currentBackgroundColor = '#ffffff';
+canvasBackground.style.backgroundColor = currentBackgroundColor;
 
+let gridLines = false;
 let popupPen = false;
 let popupBackground = false;
 
-let selected = 'pen';
+let pencil = 'pen';
+penBtn.classList.add('active');
+//
 
 // 6 as a last one build the bucket tool 
 // 7 maybe add grid size popup
 
-function popup(which) {
-    switch (which) {
-        case 'pen':
-            if (!popupPen) {
-                handler = function(event){
-                    event.stopPropagation();
-                    currentPenColor = event.target.value;
-                    penColor.style.visibility = 'hidden';
-                    penColor.removeEventListener('change', handler);
-                    popupPen = false;
-                };
-
-                popupPen = true;
-                penColor.value = currentPenColor;
-                penColor.style.visibility = 'visible';
-                penColor.addEventListener('change', handler);
-            } else {
-                penColor.style.visibility = 'hidden';
-                penColor.removeEventListener('change', handler);
-                popupPen = false;
-            }
-            break;
-
-        case 'background':
-            if (!popupBackground) {
-                handler = function(event){
-                    event.stopPropagation();
-                    canvasBackground.style.backgroundColor = event.target.value;
-
-                    test = function(shade, item) {};
-
-                    canvas.querySelectorAll('[data-color="bg"]').forEach(item => {
-                        if (item.dataset.shade == 0) {
-                            item.style.backgroundColor = canvasBackground.style.backgroundColor;
-                        } else if (item.dataset.shade > 0) {
-                            const rOriginal = rgbToInt(canvasBackground.style.backgroundColor, 'r');
-                            const rDifference = Math.round((255 - rOriginal) / 10 * item.dataset.shade);
-                            const r = rOriginal + rDifference;
-                            const gOriginal = rgbToInt(canvasBackground.style.backgroundColor, 'g');
-                            const gDifference = Math.round((255 - gOriginal) / 10 * item.dataset.shade);
-                            const g = gOriginal + gDifference;
-                            const bOriginal = rgbToInt(canvasBackground.style.backgroundColor, 'b');
-                            const bDifference = Math.round((255 - bOriginal) / 10 * item.dataset.shade);
-                            const b = bOriginal + bDifference;
-                            item.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
-                        } else if (item.dataset.shade < 0) {
-                            const rOriginal = rgbToInt(canvasBackground.style.backgroundColor, 'r');
-                            const rDifference = Math.round(rOriginal / 10 * -item.dataset.shade);
-                            const r = rOriginal - rDifference;
-                            const gOriginal = rgbToInt(canvasBackground.style.backgroundColor, 'g');
-                            const gDifference = Math.round(gOriginal / 10 * -item.dataset.shade);
-                            const g = gOriginal - gDifference;
-                            const bOriginal = rgbToInt(canvasBackground.style.backgroundColor, 'b');
-                            const bDifference = Math.round(bOriginal / 10 * -item.dataset.shade);
-                            const b = bOriginal - bDifference;
-                            item.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
-                        }
-                    });
-
-                    currentBackgroundColor = event.target.value;
-                    backgroundColor.style.visibility = 'hidden';
-                    backgroundColor.removeEventListener('change', handler);
-                    background.classList.remove('active');
-                    popupBackground = false;
-                };
-
-                popupBackground = true;
-                backgroundColor.value =  currentBackgroundColor;
-                backgroundColor.style.visibility = 'visible';
-                background.classList.add('active');
-                backgroundColor.addEventListener('change', handler);
-            } else {
-                backgroundColor.style.visibility = 'hidden';
-                backgroundColor.removeEventListener('change', handler);
-                background.classList.remove('active');
-                popupBackground = false;
-            }
-            break;    
-    }
-}
-
-function buildCanvasGrid() {
-
+const buildCanvas = function buildCanvasGrid() {
     while (canvas.firstChild) {
         canvas.removeChild(canvas.lastChild);
     }
+
     const row = currentGridSize;
     const col = currentGridSize;
-
-    if (canvasGrid) {
+    if (gridLines) {
         canvas.style.borderTop = `${borderColor} thin solid`;
         canvas.style.borderLeft = `${borderColor} thin solid`;
     }
-
     for (let i = 0; i < row; i++) {
         const rowDiv = document.createElement('div');
         rowDiv.style.display = 'flex';
@@ -134,12 +56,10 @@ function buildCanvasGrid() {
             colDiv.dataset.color = 'transparent';
             colDiv.style.backgroundColor = 'transparent';
             colDiv.dataset.shade = 0;
-
-            if (canvasGrid) {
+            if (gridLines) {
                 colDiv.style.borderRight = `${borderColor} thin solid`;
                 colDiv.style.borderBottom = `${borderColor} thin solid`;
             }
-
             colDiv.style.flex = 'auto';
             rowDiv.appendChild(colDiv);
         }
@@ -147,7 +67,8 @@ function buildCanvasGrid() {
     }
 }
 
-function clearCanvasAnimation() {
+
+const clearCanvas = function clearCanvasWithAnimation() {
     canvas.animate([
             { opacity: 1 },
             { opacity: 0 }
@@ -156,50 +77,24 @@ function clearCanvasAnimation() {
             easing: 'ease-out'
         });
 
-    setTimeout(buildCanvasGrid, 500);
+    setTimeout(buildCanvas, 500);
 }
 
-function promptCanvasSize() {
+
+const promptNewSize = function promptForNewCanvasSize() {
     const size = prompt('Enter a grid size between 1 and 128');
     if (size > 0 && size < 129) {
         currentGridSize = size;
-        buildCanvasGrid();
+        buildCanvas();
     } else if (size === null) {
         return;
     } else {
-        promptCanvasSize();
+        promptNewSize();
     }
 }
 
-function toggleGrid() {
-    canvasGrid = !canvasGrid;
-    if (canvasGrid) {
-        gridLines.classList.add('active');
-        canvas.style.borderTop = `${borderColor} thin solid`;
-        canvas.style.borderLeft = `${borderColor} thin solid`;
-        canvas.querySelectorAll('.pixel').forEach(item => {
-            item.style.borderRight = `${borderColor} thin solid`;
-            item.style.borderBottom = `${borderColor} thin solid`;
-        });
-    } else {
-        gridLines.classList.remove('active');
-        canvas.style.borderTop = 'none';
-        canvas.style.borderLeft = 'none';
-        canvas.querySelectorAll('.pixel').forEach(item => {
-            item.style.borderRight = 'none';
-            item.style.borderBottom = 'none';
-        });
-    }
 
-}
-
-function deactivateAll() {
-    toolbar.querySelectorAll('.only-one-active').forEach(item => {
-        item.classList.remove('active');
-    });
-}
-
-function rgbToInt(value, index) {
+const rgb = function getHtmlRgbValues(value, index) {
     switch (index) {
         case 'r':
             return parseInt(value.match(/\d+/g)[0]);
@@ -209,6 +104,56 @@ function rgbToInt(value, index) {
             return parseInt(value.match(/\d+/g)[2]);
     }
 }
+const rgbToInt = rgb
+
+
+const changeShade = function changeShadeWithBackground(item) {
+    const shade = item.dataset.shade
+    const color = canvasBackground.style.backgroundColor;
+    let r = rgb(color, 'r');
+    let g = rgb(color, 'g');
+    let b = rgb(color, 'b');
+    const cW = function calculateWhiteShade(color) {
+        return color + Math.round((255 - color) / 10 * shade);
+    }
+    const cB = function calculateBlackShade(color) {
+        return color - Math.round(color / 10 * -shade);
+    }
+    switch (true) {
+        case shade == 0:
+            item.style.backgroundColor = color;
+            break;
+        case shade > 0:
+            item.style.backgroundColor = `rgb(${cW(r)}, ${cW(g)}, ${cW(b)})`;
+            break;
+        case shade < 0:
+            item.style.backgroundColor = `rgb(${cB(r)}, ${cB(g)}, ${cB(b)})`;
+            break;
+    };
+};
+
+
+const toggleGrid = function toggleGridLines() {
+    gridLines = !gridLines;
+    if (gridLines) {
+        gridLinesBtn.classList.add('active');
+        canvas.style.borderTop = `${borderColor} thin solid`;
+        canvas.style.borderLeft = `${borderColor} thin solid`;
+        canvas.querySelectorAll('.pixel').forEach(item => {
+            item.style.borderRight = `${borderColor} thin solid`;
+            item.style.borderBottom = `${borderColor} thin solid`;
+        });
+    } else {
+        gridLinesBtn.classList.remove('active');
+        canvas.style.borderTop = 'none';
+        canvas.style.borderLeft = 'none';
+        canvas.querySelectorAll('.pixel').forEach(item => {
+            item.style.borderRight = 'none';
+            item.style.borderBottom = 'none';
+        });
+    }
+}
+
 
 function paint(event) {
     switch (pencil) {
@@ -217,17 +162,23 @@ function paint(event) {
             event.target.dataset.color = event.target.style.backgroundColor;
             event.target.dataset.shade = 0;
             break;
+
+        case 'bucket':
+            console.log('bucket');
+
         case 'random':
             rand = () => Math.floor(Math.random() * 256);
             event.target.style.backgroundColor = `rgb(${rand()}, ${rand()}, ${rand()})`;
             event.target.dataset.color = event.target.style.backgroundColor;
             event.target.dataset.shade = 0;
             break;
+
         case 'eraser':
             event.target.style.backgroundColor = 'transparent';
             event.target.dataset.color = 'transparent';
             event.target.dataset.shade = 0;
             break;
+
         case 'add-white':
             if (event.target.dataset.shade >= 10) return;
             if (event.target.dataset.color === 'transparent') {
@@ -235,15 +186,14 @@ function paint(event) {
             }
             event.target.dataset.shade++;
             addWhiteOrBlack(event);
-            
             break;
+
         case 'add-black':
             if (event.target.dataset.shade <= -10) return;
             if (event.target.dataset.color === 'transparent') {
                 event.target.dataset.color = 'bg';
             }
             event.target.dataset.shade--;
-
             addWhiteOrBlack(event);
             break;
         }
@@ -259,6 +209,9 @@ function addWhiteOrBlack(event) {
             case 'b':
                 return parseInt(value.match(/\d+/g)[2]);
         }
+    }
+    const setShade = function(event) {
+
     }
     if (event.target.dataset.shade == 0) {
         
@@ -320,13 +273,8 @@ function addWhiteOrBlack(event) {
     }
 }
 
-function load() {
-    canvasBackground.style.backgroundColor = '#fff';
-    buildCanvasGrid();
-    pencil = 'pen';
-    pen.classList.add('active');
 
-
+const addCanvasEventListeners = function() {
     let mouseDown = false;
     canvas.addEventListener('mousedown', (event) => {
         mouseDown = true;
@@ -342,62 +290,133 @@ function load() {
         }
         event.stopPropagation();
     });
-   canvas.addEventListener('click', (event) => {
+    canvas.addEventListener('click', (event) => {
         if (event.target.classList.contains('pixel')) {
             paint(event);
         }
         event.stopPropagation();
     });
+}
 
+
+const deactivateAll = function deactivateAllActiveClasses() {
+    toolbar.querySelectorAll('.only-one-active').forEach(item => {
+        item.classList.remove('active');
+    });
+}
+
+
+const showPopup = function showColorPickerPopup(which) {
+    switch (which) {
+        case 'pen':
+            if (!popupPen) {
+                changePen = function changePenColor(e) {
+                    e.stopPropagation();
+                    currentPenColor = e.target.value;
+                    penColorPicker.style.visibility = 'hidden';
+                    penColorPicker.removeEventListener('change', changePen);
+                    popupPen = false;
+                };
+                penColorPicker.value = currentPenColor;
+                penColorPicker.style.visibility = 'visible';
+                penColorPicker.addEventListener('change', changePen);
+                popupPen = true;
+            } else {
+                penColorPicker.style.visibility = 'hidden';
+                penColorPicker.removeEventListener('change', changePen);
+                popupPen = false;
+            }
+            break;
+        case 'background':
+            if (!popupBackground) {
+                changeBg = function changeBackgroundColor(e){
+                    e.stopPropagation();
+                    canvasBackground.style.backgroundColor = e.target.value;
+                    currentBackgroundColor = e.target.value;
+                    canvas.querySelectorAll('[data-color="bg"]').forEach(changeShade);
+                    backgroundColorPicker.style.visibility = 'hidden';
+                    backgroundBtn.classList.remove('active');
+                    backgroundColorPicker.removeEventListener('change', changeBg);
+                    popupBackground = false;
+                };
+                backgroundColorPicker.value =  currentBackgroundColor;
+                backgroundColorPicker.style.visibility = 'visible';
+                backgroundBtn.classList.add('active');
+                backgroundColorPicker.addEventListener('change', changeBg);
+                popupBackground = true;
+            } else {
+                backgroundColorPicker.style.visibility = 'hidden';
+                backgroundBtn.classList.remove('active');
+                backgroundColorPicker.removeEventListener('change', changeBg);
+                popupBackground = false;
+            }
+            break;    
+    }
+}
+
+
+const addToolbarEventListeners = function() {
 
     toolbar.addEventListener('click', (event) => {
         event.stopPropagation();   
         switch (event.target.id) {
             case 'background':
-                popup('background');
-                break;            
+                showPopup('background');
+                break; 
+
             case 'pen':
                 pencil = 'pen';
                 deactivateAll();
-                pen.classList.add('active');
-                popup('pen');
+                penBtn.classList.add('active');
+                showPopup('pen');
                 break;
+
             case 'bucket':
                 pencil = 'bucket';
                 deactivateAll();
                 bucket.classList.add('active');
                 break;
+
             case 'eraser':
                 pencil = 'eraser';
                 deactivateAll();
-                eraser.classList.add('active');
+                eraserBtn.classList.add('active');
                 break;
+
             case 'random':
                 pencil = 'random';
                 deactivateAll();
-                randomColor.classList.add('active');
-                break;  
+                randomColorBtn.classList.add('active');
+                break; 
+
             case 'add-white':
                 pencil = 'add-white';
                 deactivateAll();
-                addWhite.classList.add('active');
+                addWhiteBtn.classList.add('active');
                 break;
+
             case 'add-black':
                 pencil = 'add-black';
                 deactivateAll();
-                addBlack.classList.add('active');
+                addBlackBtn.classList.add('active');
                 break;
+
             case 'grid-lines':
                 toggleGrid();
-                break;                   
+                break; 
+
             case 'size':
-                promptCanvasSize();
+                promptNewSize();
                 break;
+
             case 'clear':
-                clearCanvasAnimation();
+                clearCanvas();
                 break;
         }
     });
 }
 
-load();
+
+addCanvasEventListeners();
+addToolbarEventListeners();
+buildCanvas();
