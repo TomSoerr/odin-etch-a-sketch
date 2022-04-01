@@ -19,8 +19,6 @@ body {
     height: 100vh;
 }
 
-
-
 /* Toolbar */
 .container-toolbar {
     position: fixed;
@@ -80,11 +78,8 @@ img:hover {
     -webkit-filter: opacity(100%);
     border-left: 0.5vh solid white;
 }
-
-    
+   
 /* canvas */
-
-
 .container-canvas {
     cursor: pointer;
     height: 90vh;
@@ -99,8 +94,7 @@ img:hover {
     cursor: grabbing;
 }
 
-/* Toolbar portrait*/
-
+/* Toolbar portrait
 @media (orientation: portrait) {
     .container-toolbar {
         position: fixed;
@@ -115,4 +109,4 @@ img:hover {
         background-color: aqua;
     }
 }
-    
+     */
