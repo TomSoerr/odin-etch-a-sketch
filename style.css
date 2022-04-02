@@ -156,8 +156,8 @@ img:hover {
     }
     
     .container-toolbar-extension input {
-        width: 8vw;
-        height: 8vw;
+        width: 9vw;
+        height: 9vw;
         padding: 1vw 1vw 1vw 1vw;
         background-color: var(--toolbar-color);
         box-sizing: border-box;

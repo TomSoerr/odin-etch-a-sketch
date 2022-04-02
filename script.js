@@ -179,11 +179,11 @@ const changeShade = function changeShadeWithBackground(item) {
 };
 
 
-const addWhiteOrBlack = function addWhiteOrBlackShading(event) {
-    const shade = event.target.dataset.shade;
-    const style = event.target.style
+const addWhiteOrBlack = function addWhiteOrBlackShading(target) {
+    const shade = target.dataset.shade;
+    const style = target.style
     const bgColor = canvasBackground.style.backgroundColor;
-    const penColor = event.target.dataset.color;
+    const penColor = target.dataset.color;
 
     const cW = function calculateWhiteShade(color) {
         return color + Math.round((255 - color) / 10 * shade);
@@ -234,12 +234,15 @@ const addWhiteOrBlack = function addWhiteOrBlackShading(event) {
 const paint = function paintOnTheCanvas(event) {
     let style;
     let dataset;
+    let target;
     try {
         style = event.target.style;
         dataset = event.target.dataset;
+        target = event.target;
     } catch (TypeError) {
         style = event.style;
         dataset = event.dataset;
+        target = event;
     }
     switch (pencil) {
         case 'pen':
@@ -249,7 +252,7 @@ const paint = function paintOnTheCanvas(event) {
             break;
 
         case 'bucket':
-            bucketTool(event.target);
+            bucketTool(target);
             pencil = 'pen';
             deactivateAll();
             penBtn.classList.add('active');
@@ -274,7 +277,7 @@ const paint = function paintOnTheCanvas(event) {
                 dataset.color = 'bg';
             }
             dataset.shade++;
-            addWhiteOrBlack(event);
+            addWhiteOrBlack(target);
             break;
 
         case 'add-black':
@@ -283,7 +286,7 @@ const paint = function paintOnTheCanvas(event) {
                 dataset.color = 'bg';
             }
             dataset.shade--;
-            addWhiteOrBlack(event);
+            addWhiteOrBlack(target);
             break;
         }
 };
@@ -313,6 +316,7 @@ const addCanvasEventListeners = function() {
     });
 
     canvas.addEventListener('touchstart', (event) => {  
+        console.log('touchstart');
         event.preventDefault();
         if (event.target.classList.contains('pixel')) {
             paint(event);
