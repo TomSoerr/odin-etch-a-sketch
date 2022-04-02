@@ -15,7 +15,7 @@ const gridLinesBtn = document.querySelector('#grid-lines');
 
 // initial values
 let borderColor = 'rgb(127, 127, 127)';
-let currentGridSize = 10;
+let currentGridSize = 16;
 let currentPenColor = '#000000';
 let currentBackgroundColor = '#ffffff';
 canvasBackground.style.backgroundColor = currentBackgroundColor;
@@ -232,8 +232,15 @@ const addWhiteOrBlack = function addWhiteOrBlackShading(event) {
 
 
 const paint = function paintOnTheCanvas(event) {
-    const style = event.target.style;
-    const dataset = event.target.dataset;
+    let style;
+    let dataset;
+    try {
+        style = event.target.style;
+        dataset = event.target.dataset;
+    } catch (TypeError) {
+        style = event.style;
+        dataset = event.dataset;
+    }
     switch (pencil) {
         case 'pen':
             style.backgroundColor = currentPenColor;
@@ -303,6 +310,21 @@ const addCanvasEventListeners = function() {
             paint(event);
         }
         event.stopPropagation();
+    });
+
+    canvas.addEventListener('touchstart', (event) => {  
+        event.preventDefault();
+        if (event.target.classList.contains('pixel')) {
+            paint(event);
+        }
+    });
+    canvas.addEventListener('touchmove', (event) => {
+        event.preventDefault();
+        const touch = event.touches[0];
+        const target = document.elementFromPoint(touch.clientX, touch.clientY);
+        if (target.classList.contains('pixel')) {
+            paint(target);
+        }
     });
 };
 

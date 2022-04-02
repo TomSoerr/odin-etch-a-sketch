@@ -4,6 +4,7 @@
 }
 
 body {
+    position: fixed;
     background-color: var(--background-color);
     margin: 0;
     padding-left: 8vh;
@@ -17,6 +18,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
+    width: 100vw;
 }
 
 /* Toolbar */
@@ -95,9 +97,6 @@ img:hover {
 }
 
 /* link */
-
-
-
 #github {
     position: fixed;
     bottom: 0;
@@ -110,19 +109,103 @@ img:hover {
 }
 
 
-/* Toolbar portrait
-@media (orientation: portrait) {
+@media screen and (orientation: portrait) {
+    body {
+        position: fixed;
+        top: 0;
+        left: 0;
+        background-color: var(--background-color);
+        margin: 0;
+        padding-left: 0;
+        padding-top: 9vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+    }
+    
+    /* Toolbar */
     .container-toolbar {
         position: fixed;
-        top: 92vh;
+        top: 0;
+        left: 0;
         background-color: var(--toolbar-color);
-        height: 8vh;
-        width: 100%;
+        height: 9vw;
+        width: 100vw;
         display: flex;
         flex-direction: row;
+        align-items: center;
     }
-    body {
-        background-color: aqua;
+    
+    #grid-lines {
+        margin-left: auto;
+        margin-top: 0;
+    }
+    
+    img {
+        position: relative;
+        width: 9vw;
+        height: 9vw;
+        border-left: 0;
+        border-top: 1vw solid transparent;
+        padding: 0vw 1vw 1vw 1vw;
+        box-sizing: border-box;
+        filter: opacity(60%);
+        -webkit-filter: opacity(60%);
+        cursor: pointer;
+    }
+    
+    .container-toolbar-extension input {
+        width: 8vw;
+        height: 8vw;
+        padding: 1vw 1vw 1vw 1vw;
+        background-color: var(--toolbar-color);
+        box-sizing: border-box;
+        border: 0;
+        visibility: hidden;
+    }
+    
+    .container-toolbar-extension {
+        position: fixed;
+        top: 9vw;
+        left: 0;
+        display: flex;
+        flex-direction: row;
+        background-color: transparent;
+    }
+    
+    .active {
+        filter: opacity(100%);
+        -webkit-filter: opacity(100%);
+        border-left: 0;
+        border-top: 1vw solid white;
+    }
+       
+    /* canvas */
+    .container-canvas {
+        cursor: pointer;
+        height: 100vw;
+        width: 100vw;
+        display: flex;
+        flex-direction: column;
+        background-color: transparent;
+        box-sizing: border-box;
+    }
+    
+    .container-canvas:active {
+        cursor: grabbing;
+    }
+    
+    /* link */
+    #github {
+        position: fixed;
+        bottom: 0;
+        right: 0;
+        color: black;
+        background-color: white;
+        text-decoration: none;
+        font-size: 1.5vh;
+        padding: 0.3vh;
     }
 }
-     */
+    
