@@ -1,20 +1,23 @@
-# Mein „Etch a Sketch“ Projekt
+# My “Etch a Sketch” Project
+![preview gif](./media/prev.gif) 
 
-In diesem Projekt von <em>„The Odin Project“</em> erstelle ich eine kleine Webanwendung zum zeichnen. Die Leinwand besteht aus Pixeln. 
-Hier ist ein Link zur [Live Preview](https://tomsoerr.github.io/odin-rock-paper-scissors/).
+## Description
+In this project from “The Odin Project” I create a painting web application only with JS DOM Manipulation. The canvas consists only of div boxes. <br>
+This project has the following features:
+- change the background,
+- change the color of the pen,
+- a bucket/fill tool,
+- an eraser,
+- choose a random color for each pixel,
+- put a shadow or a lightening over a color or the background,
+- turn a grid on and off,
+- select a new resolution for the canvas and
+- clean the canvas.
 
-Es gibt folgende Möglichkeiten,
-- den Hintergrund zu verändern,
-- die Farbe des Stiftes zu ändern,
-- ein Bucket-/Ausfüll-Tool,
-- einen Radierer,
-- für jeden Pixel eine zufällige Farbe auswählen,
-- einen Schatten oder eine Erhellung über eine Farbe oder den Hintergrund legten,
-- ein Gitter ein- und ausschalten,
-- eine neue Auflösung für die Leinwand wählen und
-- die Leinwand zu reinigen.
+## Links
+- [Live Preview](https://tomsoerr.github.io/odin-rock-paper-scissors/)
+- Link to the [Assignment](https://www.theodinproject.com/lessons/foundations-etch-a-sketch)
+- See my next [Project](https://github.com/TomSoerr/odin-calculator)
 
-Die Icons wurden von mir erstellt.
-
-Hier geht es zu meinem nächsten [Projekt](https://github.com/TomSoerr/odin-calculator).
-
+## Notes
+If you want to,  you can use the icons. They are made by myself.
