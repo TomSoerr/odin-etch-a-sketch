@@ -1,33 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Etch a Sketch</title>
     <script src="./script.js" defer></script>
-    <link rel="stylesheet" href="./style.css">
-    <link rel="icon" type="image/png" href="./icons/favicon.png"/>
-</head>
-<body>
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="icon" type="image/png" href="./icons/favicon.png" />
+  </head>
+  <body>
     <div class="container-toolbar">
-        <img id="background" src="./icons/background.png" alt="Background Color" title="Background color">
-        <img id="pen" class="only-one-active" typ src="./icons/pen.png" alt="Pencil" title="Pencil">           
-        <img id="bucket" class="only-one-active" src="./icons/fill.png" alt="Bucket" title="Bucket Tool">
-        <img id="eraser" class="only-one-active" src="./icons/eraser.png" alt="Eraser" title="Eraser">
-        <img id="random" class="only-one-active" src="./icons/random.png" alt="Random Color Tool" title="Random Color Tool">
-        <img id="add-white" class="only-one-active" src="./icons/w++.png" alt="Add White" title="Add White">
-        <img id="add-black" class="only-one-active" src="./icons/b++.png" alt="Add Black" title="Add Black">
-        <img id="grid-lines" src="./icons/grid.png" alt="Toggle Grid Lines" title="Toggle Grid Lines">
-        <img id="size" src="./icons/size.png" alt="Grid Size" title="Grid Size">
-        <img id="clear" src="./icons/clear.png" alt="Clear" title="Clear">
-        <div class="container-toolbar-extension">
-            <input type="color" id="background-color">
-            <input type="color" id="pen-color">
-        </div>
+      <img
+        id="background"
+        src="./icons/background.png"
+        alt="Background Color"
+        title="Background color"
+      />
+      <img
+        id="pen"
+        class="only-one-active"
+        typ
+        src="./icons/pen.png"
+        alt="Pencil"
+        title="Pencil"
+      />
+      <img
+        id="bucket"
+        class="only-one-active"
+        src="./icons/fill.png"
+        alt="Bucket"
+        title="Bucket Tool"
+      />
+      <img
+        id="eraser"
+        class="only-one-active"
+        src="./icons/eraser.png"
+        alt="Eraser"
+        title="Eraser"
+      />
+      <img
+        id="random"
+        class="only-one-active"
+        src="./icons/random.png"
+        alt="Random Color Tool"
+        title="Random Color Tool"
+      />
+      <img
+        id="add-white"
+        class="only-one-active"
+        src="./icons/w++.png"
+        alt="Add White"
+        title="Add White"
+      />
+      <img
+        id="add-black"
+        class="only-one-active"
+        src="./icons/b++.png"
+        alt="Add Black"
+        title="Add Black"
+      />
+      <img
+        id="grid-lines"
+        src="./icons/grid.png"
+        alt="Toggle Grid Lines"
+        title="Toggle Grid Lines"
+      />
+      <img id="size" src="./icons/size.png" alt="Grid Size" title="Grid Size" />
+      <img id="clear" src="./icons/clear.png" alt="Clear" title="Clear" />
+      <div class="container-toolbar-extension">
+        <input type="color" id="background-color" />
+        <input type="color" id="pen-color" />
+      </div>
     </div>
     <div class="container-canvas-background">
-        <div class="container-canvas">
-        </div>
+      <div class="container-canvas"></div>
     </div>
-    <a id="github" href="https://github.com/TomSoerr/odin-etch-a-sketch">Back to GitHub</a>    
-</body>
+    <a
+      style="
+        position: fixed;
+        bottom: 0;
+        right: 0;
+        color: black;
+        background-color: white;
+        text-decoration: none;
+        font-size: 16px;
+        font-family: sans-serif;
+        padding: 2px;
+        border: thin solid black;
+        text-decoration: underline;
+      "
+      href="https://tomsoerr.github.io/#/impressum"
+    >
+      Imprint
+    </a>
+    <span
+      style="
+        z-index: 1000;
+        position: fixed;
+        top: 0;
+        right: 0;
+        color: black;
+        background-color: white;
+        text-decoration: none;
+        font-size: 16px;
+        font-family: sans-serif;
+        padding: 2px;
+        border: thin solid black;
+      "
+    >
+      Not a commercial site, only for educational purposes.
+    </span>
+  </body>
 </html>
